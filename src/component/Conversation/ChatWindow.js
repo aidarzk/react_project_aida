@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 class ChatWindow extends React.Component {
   render () {
-    console.log('jjj', this.props.messageList[0].text)
+    // console.log('jjj', this.props.messageList[0].text)
     return (
       <div className='chat-window'>
         {

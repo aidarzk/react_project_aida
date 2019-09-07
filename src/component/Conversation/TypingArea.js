@@ -7,7 +7,8 @@ class TypingArea extends React.Component {
     super()
 
     this.state = {
-      newMessage: ''
+      newMessage: '',
+      token: window.localStorage.getItem('token')
     }
   }
 
@@ -20,17 +21,18 @@ class TypingArea extends React.Component {
 
   handleSend () {
     this.props.dispatch(addNewMessage(this.state.newMessage))
-    this.setState({ newMessage: '' })
+    this.createMessage()
   }
 
-  createConversation (user) {
-    axios.post('https://api.paywith.click/conversation/create/', {
-      conversation_id: user.conversation_id,
-      token: this.state.token
-      // text
-    })
+  createMessage () {
+    const foodata = new FormData()
+    foodata.append('token', this.state.token)
+    foodata.append('conversation_id', 450)
+    foodata.append('text', this.state.newMessage)
+    axios.post('https://api.paywith.click/conversation/create/', foodata
+    )
       .then((response) => {
-        console.log(response)
+        console.log('4587', response)
         // this.setState({ conversation_id: response.data.data.user.conversation_id })
       })
       .catch(function (error) {

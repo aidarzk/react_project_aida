@@ -3,20 +3,7 @@ const initial = {
   userName: '',
   email: '',
   picture: '',
-  messageList: [
-    {
-      text: 'salam',
-      date: '3/2',
-      sender: 1,
-      receiver: 3
-    },
-    {
-      text: 'manam',
-      date: '3/2',
-      sender: 5,
-      receiver: 1
-    }
-  ],
+  messageList: [],
   conversationList: []
 }
 const conversation = (state = initial, action) => {

@@ -2,6 +2,7 @@ import React from 'react'
 import ConversationContainer from '../../container/conversationContainer'
 import { getConversationList } from '../../action/conversationAction'
 import axios from 'axios'
+import { connect } from 'react-redux'
 
 class ConversationList extends React.Component {
   constructor () {
@@ -45,7 +46,7 @@ class ConversationList extends React.Component {
       .then((response) => {
         this.setState({ suggestUser: response.data.data.users })
         console.log(response)
-        console.log('222', this.state.suggestUser)
+        console.log('22211', this.state.suggestUser)
         // response.data.data.users.id
       })
       .catch(function (error) {
@@ -61,6 +62,7 @@ class ConversationList extends React.Component {
     )
       .then((response) => {
         console.log('2222', response)
+        console.log('545454', response.data.data.conversation_id)
       })
       .catch(function (error) {
         console.log(error)
@@ -105,10 +107,28 @@ class ConversationList extends React.Component {
           <ConversationContainer name='arash' date='5/5' text='Hahaha' num='15' />
           <ConversationContainer name='Delaram' date='11/11' text='bye' num='18' /> */}
         </div>
+        <div>
+          {this.props.conversationList.map((item, index) => (
+            <ConversationContainer
+              key={index}
+              name={item.id}
+              lastName={item.lastName}
+              text={item.latestMessage}
+              num={item.unseenMessage}
+            />
+          )
+          )
+          }
+        </div>
       </div>
     )
   }
 }
 
-
-export default ConversationList
+const mapStateToProps = (state) => ({
+  conversationList: state.conversationList
+})
+const mapDispatchToProps = (dispatch) => ({
+  dispatch: dispatch
+})
+export default connect(mapStateToProps, mapDispatchToProps)(ConversationList)
