@@ -39,7 +39,7 @@ class Conv extends React.Component {
 
   render () {
     const pic = require('../../pic3.jpg')
-    console.log('prrrr', this.props)
+    // console.log('prrrr', this.props)
     return (
       <div
         className='conversation'
@@ -65,7 +65,7 @@ class Conv extends React.Component {
           <div className='text-num'>
             <div className='text'>
               <span>
-                {this.props.text}
+                {this.props.text}...
               </span>
             </div>
             <div className='num'>

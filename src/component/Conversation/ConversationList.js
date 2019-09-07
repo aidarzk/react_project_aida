@@ -71,6 +71,7 @@ class ConversationList extends React.Component {
 
   render () {
     console.log('props', this.props)
+    console.log('convL', this.props.conversationList)
     return (
       <div className='conversationList'>
         <input className='search'
@@ -108,15 +109,19 @@ class ConversationList extends React.Component {
           <ConversationContainer name='Delaram' date='11/11' text='bye' num='18' /> */}
         </div>
         <div>
-          {this.props.conversationList.map((item, index) => (
-            <ConversationContainer
-              key={index}
-              name={item.id}
-              lastName={item.lastName}
-              text={item.latestMessage}
-              num={item.unseenMessage}
-            />
-          )
+          {this.props.conversationList.map((item, index) => {
+            if (item.id !== 299) {
+              return (
+                <ConversationContainer
+                  key={index}
+                  name={item.id}
+                  date={item.latest_message_date}
+                  text={item.latest_message}
+                  num={item.unseen_messages[0]}
+                />
+              )
+            }
+          }
           )
           }
         </div>

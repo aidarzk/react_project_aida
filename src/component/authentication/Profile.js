@@ -13,16 +13,27 @@ function Profile () {
     phone: '',
     country: ''
   })
+  const [token] = useState(window.localStorage.getItem('token'))
   console.log('fff', fields)
   useEffect(() => {
     console.log('===')
-    axios.post('https://api.paywith.click/auth/signin/', {
-      email: fields.email,
-      password: fields.password
+    axios.post('https://api.paywith.click/auth/profile/', {
+      token: token,
+      description: 'my bio',
+      user_type: 'organization',
+      phone_number: '989381442322',
+      avatar: '',
+      location_lat: '43',
+      location_long: '-79',
+      mobile_number: '989381442322',
+      name: 'Donald Trump',
+      website: 'https://trump.gov.ir',
+      country_code: 'CA',
+      address: 'Whitehouse'
     })
       .then((response) => {
         console.log('data:', response.data)
-        window.localStorage.setItem('token', response.data.data.token)
+        // window.localStorage.setItem('token', response.data.data.token)
       })
       .catch(function (errors) {
         console.log(errors)
