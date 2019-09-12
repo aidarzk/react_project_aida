@@ -16,7 +16,7 @@ class HeadInfo extends React.Component {
             <span>{this.props.userName}</span>
           </div>
           <div className='email'>
-            <span>aida@yahoo.com</span>
+            <span>start a conversation here ...</span>
           </div>
         </div>
         <i className='fa fa-volume-control-phone' style={{ alignSelf: 'flex-start' }} />

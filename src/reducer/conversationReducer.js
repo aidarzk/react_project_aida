@@ -4,7 +4,8 @@ const initial = {
   email: '',
   picture: '',
   messageList: [],
-  conversationList: []
+  conversationList: [],
+  conversationId: ''
 }
 const conversation = (state = initial, action) => {
   switch (action.type) {
@@ -30,11 +31,15 @@ const conversation = (state = initial, action) => {
         ...state,
         conversationList: action.payload
       }
-
     case 'SAVE_SELECTED_EMAIL':
       return {
         ...state,
         email: action.payload
+      }
+    case 'SAVE_CONVERSATION_ID':
+      return {
+        ...state,
+        conversationId: action.payload
       }
     // case 'SAVE_SELECTED_PICTURE':
     //   return {

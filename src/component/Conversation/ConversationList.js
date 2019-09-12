@@ -1,6 +1,6 @@
 import React from 'react'
 import ConversationContainer from '../../container/conversationContainer'
-import { getConversationList } from '../../action/conversationAction'
+import { getConversationList, getConversationId } from '../../action/conversationAction'
 import axios from 'axios'
 import { connect } from 'react-redux'
 
@@ -9,7 +9,8 @@ class ConversationList extends React.Component {
     super()
     this.state = {
       token: window.localStorage.getItem('token'),
-      suggestUser: []
+      suggestUser: [],
+      myId: window.localStorage.getItem('id')
     }
   }
 
@@ -54,10 +55,10 @@ class ConversationList extends React.Component {
       })
   }
 
-  createConversationRequest (uid) {
+  createConversationRequest (id) {
     const fodata = new FormData()
     fodata.append('token', this.state.token)
-    fodata.append('user_id', uid)
+    fodata.append('user_id', id)
     axios.post('https://api.paywith.click/conversation/', fodata
     )
       .then((response) => {
@@ -109,7 +110,7 @@ class ConversationList extends React.Component {
           <ConversationContainer name='Delaram' date='11/11' text='bye' num='18' /> */}
         </div>
         <div>
-          {this.props.conversationList.map((item, index) => {
+          {/* {this.props.conversationList.map((item, index) => {
             if (item.id !== 299) {
               return (
                 <ConversationContainer
@@ -121,6 +122,27 @@ class ConversationList extends React.Component {
                 />
               )
             }
+          }
+          )
+          } */}
+
+          {this.props.conversationList.map((item, index) => {
+            return (
+              item.users.map((user, indexss) => {
+                if (user.id != this.state.myId) {
+                  return (
+                    <ConversationContainer
+                      key={indexss}
+                      name={user.email}
+                      date={item.latest_message_date}
+                      text={item.latest_message}
+                      conversation_id={item.id}
+                      num={item.unseen_messages[0]}
+                    />
+                  )
+                } else return null
+              })
+            )
           }
           )
           }

@@ -1,3 +1,5 @@
+import ConversationList from "../component/Conversation/ConversationList"
+
 export const getUserName = (userName) => ({
   type: 'SAVE_SELECTED_USERNAME',
   payload: userName
@@ -18,7 +20,11 @@ export const getEmail = (email) => ({
   type: 'SAVE_SELECTED_EMAIL',
   payload: email
 })
-export const getConversationList = (conversationList) => ({
+export const getConversationList = (ConversationList) => ({
   type: 'GET_CONVERSATION_LIST',
-  payload: conversationList
+  payload: ConversationList
+})
+export const getConversationId = (conversationId) => ({
+  type: 'SAVE_CONVERSATION_ID',
+  payload: conversationId
 })

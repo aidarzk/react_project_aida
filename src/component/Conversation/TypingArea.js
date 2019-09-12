@@ -1,6 +1,7 @@
 import React from 'react'
 import { addNewMessage } from '../../action/conversationAction'
 import axios from 'axios'
+import { connect } from 'react-redux'
 
 class TypingArea extends React.Component {
   constructor () {
@@ -25,15 +26,15 @@ class TypingArea extends React.Component {
   }
 
   createMessage () {
+    console.log('propshaha', this.props)
     const foodata = new FormData()
     foodata.append('token', this.state.token)
-    foodata.append('conversation_id', 450)
+    foodata.append('conversation_id', this.props.conversationId)
     foodata.append('text', this.state.newMessage)
     axios.post('https://api.paywith.click/conversation/create/', foodata
     )
       .then((response) => {
         console.log('4587', response)
-        // this.setState({ conversation_id: response.data.data.user.conversation_id })
       })
       .catch(function (error) {
         console.log(error)
@@ -62,4 +63,7 @@ class TypingArea extends React.Component {
   }
 }
 
-export default TypingArea
+const mapStateToProps = (state) => ({
+  conversationId: state.conversationId
+})
+export default connect(mapStateToProps)(TypingArea)

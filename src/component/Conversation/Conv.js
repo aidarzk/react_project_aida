@@ -1,5 +1,5 @@
 import React from 'react'
-import { getUserName } from '../../action/conversationAction'
+import { getUserName, getConversationId } from '../../action/conversationAction'
 import Avatar from '@material-ui/core/Avatar'
 import axios from 'axios'
 
@@ -12,18 +12,21 @@ class Conv extends React.Component {
   }
 
   clickHandler () {
-    console.log('uuuuuu')
+    console.log('uuuuuu', this.props.conversation_id)
     this.props.dispatch(getUserName(this.props.name, this.props.lastName))
+    this.props.dispatch(getConversationId(this.props.conversation_id))
     this.getMessageList()
   }
 
   getMessageList () {
-    console.log('hiiiii')
+    console.log('hiprops', this.props)
+    console.log('timeee', new Date().getTime().toFixed(0))
+    console.log('timeee222', new Date().getHours().toFixed(0))
     const fordata = new FormData()
     fordata.append('token', this.state.token)
-    fordata.append('conversation_id', 450)
-    fordata.append('size', 4)
-    fordata.append('date', 1)
+    fordata.append('conversation_id', this.props.conversation_id) //this.props.cid
+    fordata.append('size', 10)
+    fordata.append('date', (new Date().getTime() / 1000).toFixed(0))
     axios.post('https://api.paywith.click/conversation/details/', fordata
     )
       .then((response) => {
